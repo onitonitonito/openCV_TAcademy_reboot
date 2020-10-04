@@ -1,0 +1,32 @@
+filename = namecard_extracted.png
+img size = (720, 400) 
+
+
+
+
+
+16.84 % ... | 황선규(Sunkyoo Hwang)            
+15.28 % ... | IT전문서저사lIT 강사                 
+89.69 % ... | 공학박사                          
+ 3.94 % ... | tOpenCV #Computer Vision      
+ 1.48 % ... |  DeepLearning +Algorithm      
+26.24 % ... | sunkyoo.hwang@gmail.com       
+ 2.25 % ... | htps;Ilsunkyoo github io/     
+
+count     7.000000
+mean     22.244836
+std      31.116575
+min       1.475343
+25%       3.095506
+50%      15.277332
+75%      21.537647
+max      89.694870
+Name: 1, dtype: float64
+
+[0, 16.837120056152344]
+[1, 15.277332067489624]
+[2, 89.69486951828003]
+[3, 3.9435915648937225]
+[4, 1.4753432013094425]
+[5, 26.238173246383667]
+[6, 2.2474195808172226]

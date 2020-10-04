@@ -1,0 +1,42 @@
+filename = english.png
+img size = (905, 480) 
+
+
+
+
+
+ 3.28 % ... | Reduce your risk of coronavirus infection:
+11.50 % ... | Clean hands with soap and water
+12.66 % ... | or alcohol based hand rub     
+ 8.02 % ... | Cover nose and mouth when coughing and
+18.18 % ... | sneezing with tissue or flexed elbow
+19.46 % ... | Avoid close contact with anyone with
+17.05 % ... | cold or flu-like symptoms     
+ 9.64 % ... | Thoroughly cook meat and eggs 
+ 8.66 % ... | No unprotected contact with live wild
+55.10 % ... | or farm animals               
+64.68 % ... | World Health                  
+74.60 % ... | Organization                  
+
+count    12.000000
+mean     25.236737
+std      24.639728
+min       3.281687
+25%       9.398388
+50%      14.854768
+75%      28.367488
+max      74.603105
+Name: 1, dtype: float64
+
+[0, 3.2816872000694275]
+[1, 11.503543704748154]
+[2, 12.657591700553894]
+[3, 8.018597960472107]
+[4, 18.18138062953949]
+[5, 19.456815719604492]
+[6, 17.051944136619568]
+[7, 9.644994139671326]
+[8, 8.658567816019058]
+[9, 55.09950518608093]
+[10, 64.68310952186584]
+[11, 74.60310459136963]

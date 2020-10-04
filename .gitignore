@@ -1,0 +1,28 @@
+#___________________________________
+#  1. cache, build, db sqlite3 files
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.ipynb_checkpoints/
+__pycache__/
+.vscode
+*.pyc
+*.log
+*.ini
+
+
+#___________________________________
+#  2. Temporary exec files for TEST
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_.py
+
+
+#___________________________________
+#  3. openCV DNN model & Learn value
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+*.pb
+*.caffemodel
+*.avi
+*.h5
+*.xml
+
+im_boxed_*.png
+CHART_*.png

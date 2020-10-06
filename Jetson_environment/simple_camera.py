@@ -1,28 +1,35 @@
-# MIT License
-# Copyright (c) 2019 JetsonHacks
-# See license
-# Using a CSI camera (such as the Raspberry Pi Version 2) connected to a
-# NVIDIA Jetson Nano Developer Kit using OpenCV
-# Drivers for the camera and OpenCV are included in the base image
-
-import cv2
-
+"""
+$ v4l2-ctl --list-formats-ext
+ioctl: VIDIOC_ENUM_FMT
+	Index       : 0
+	Type        : Video Capture
+	Pixel Format: 'RG10'
+	Name        : 10-bit Bayer RGRG/GBGB
+		Size: Discrete 3280x2464 / 0.048s (21.000 fps)
+		Size: Discrete 3280x1848 / 0.036s (28.000 fps)
+		Size: Discrete 1920x1080 / 0.033s (30.000 fps)
+		Size: Discrete 1280x720  / 0.017s (60.000 fps)
+		Size: Discrete 1280x720  / 0.017s (60.000 fps)
+"""
 # gstreamer_pipeline returns a GStreamer pipeline for capturing from the CSI camera
 # Defaults to 1280x720 @ 60fps
 # Flip the image by setting the flip_method (most common values: 0 and 2)
 # display_width and display_height determine the size of the window on the screen
 # Pixel Count: 3280 x 2464 (active pixels) 3296 x 2512 (total pixels)
 
+import cv2
+
 def gstreamer_pipeline(
-    sensor_id=0,
-    sensor_mode=3,
-    capture_width=3296,
-    capture_height=2512,
-    display_width=1280,
-    display_height=720,
-    framerate=60,
-    flip_method=0,
-):
+        sensor_id=0,
+        sensor_mode=3,
+        capture_width=3296,
+        capture_height=2512,
+        display_width=1280,
+        display_height=720,
+        framerate=60,
+        flip_method=0,
+    ) -> str:
+    """ get_commends string"""
     return (
         "nvarguscamerasrc sensor-id=%d sensor-mode=%d ! "
         "video/x-raw(memory:NVMM), "

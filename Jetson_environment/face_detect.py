@@ -12,7 +12,19 @@ import cv2
 # Defaults to 1280x720 @ 30fps
 # Flip the image by setting the flip_method (most common values: 0 and 2)
 # display_width and display_height determine the size of the window on the screen
-
+"""
+$ v4l2-ctl --list-formats-ext
+ioctl: VIDIOC_ENUM_FMT
+	Index       : 0
+	Type        : Video Capture
+	Pixel Format: 'RG10'
+	Name        : 10-bit Bayer RGRG/GBGB
+		Size: Discrete 3280x2464 / 0.048s (21.000 fps)
+		Size: Discrete 3280x1848 / 0.036s (28.000 fps)
+		Size: Discrete 1920x1080 / 0.033s (30.000 fps)
+		Size: Discrete 1280x720  / 0.017s (60.000 fps)
+		Size: Discrete 1280x720  / 0.017s (60.000 fps)
+"""
 
 def gstreamer_pipeline(
     sensor_id=0,
@@ -25,6 +37,7 @@ def gstreamer_pipeline(
     flip_method=0,
 ):
     return (
+
         "nvarguscamerasrc sensor-id=%d sensor-mode=%d ! "
         "video/x-raw(memory:NVMM), "
         "width=(int)%d, height=(int)%d, "

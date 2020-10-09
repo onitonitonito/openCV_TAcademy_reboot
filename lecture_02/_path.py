@@ -9,7 +9,7 @@ import sys
 from typing import List
 
 
-NAME_HOME = 'openCV_TAcademy'
+NAME_HOME = 'openCV_TAcademy_reboot'
 
 
 def get_cut_dir(name_cut:str) -> str:
@@ -30,8 +30,8 @@ def stop_if_none(object:object, message:str='') -> object:
         return object
 
 
-DIR_HOME = get_cut_dir(NAME_HOME) + '\\'
-DIR_SRC = DIR_HOME + 'src\\'
+DIR_HOME = get_cut_dir(NAME_HOME)
+DIR_SRC = DIR_HOME + 'src/'
 
 sys.path.insert(0, DIR_HOME)
 

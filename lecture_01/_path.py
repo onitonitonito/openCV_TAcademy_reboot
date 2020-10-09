@@ -9,7 +9,7 @@ import sys
 from typing import List
 
 
-NAME_HOME = 'openCV_TAcademy'
+NAME_HOME = 'openCV_TAcademy_reboot'
 
 
 def get_cut_dir(name_cut:str) -> str:

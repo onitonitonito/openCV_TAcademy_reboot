@@ -22,6 +22,7 @@ _.py
 *.avi
 *.h5
 *.xml
+*.mp4
 
 im_boxed_*.png
 CHART_*.png

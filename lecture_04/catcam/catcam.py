@@ -15,9 +15,9 @@ import numpy as np
 from _path import get_cut_dir, stop_if_none
 
 
-dir_src = get_cut_dir('openCV_TAcademy') + 'src\\'
-dir_dnn = get_cut_dir('catcam') + 'src_dnn\\'
-dir_img = get_cut_dir('catcam') + 'src_img\\'
+dir_src = get_cut_dir('openCV_TAcademy_reboot') + 'src/'
+dir_dnn = get_cut_dir('catcam') + 'src_dnn/'
+dir_img = get_cut_dir('catcam') + 'src_img/'
 
 
 model = dir_dnn + 'opencv_face_detector_uint8.pb'
@@ -28,7 +28,52 @@ cat = cv2.imread(dir_img + 'ears_cat.png', cv2.IMREAD_UNCHANGED)
 cat = stop_if_none(cat, message='Image open failed!')
 
 # CAMERA OBJECT LOAD! : IF OBJECT == NONE -> ERROR!
-cap = cv2.VideoCapture(0)
+# cap = cv2.VideoCapture(0)
+
+# Currently there are setting frame rate on CSI Camera on Nano through gstreamer
+# Here we directly select sensor_mode 3 (1280x720, 59.9999 fps)
+
+def gstreamer_pipeline(
+        sensor_id=0,
+        sensor_mode=3,
+        capture_width=1280,
+        capture_height=720,
+        display_width=1280,
+        display_height=720,
+        
+        framerate=30,
+        flip_method=0,
+    ):
+    """# RETURN: VIDEO STREAMER COMMANDS-STRING """
+    return (
+        "nvarguscamerasrc sensor-id=%d sensor-mode=%d ! "
+        "video/x-raw(memory:NVMM), "
+        "width=(int)%d, height=(int)%d, "
+        "format=(string)NV12, framerate=(fraction)%d/1 ! "
+        "nvvidconv flip-method=%d ! "
+        "video/x-raw, width=(int)%d, height=(int)%d, format=(string)BGRx ! "
+        "videoconvert ! "
+        "video/x-raw, format=(string)BGR ! appsink"
+        % (
+            sensor_id,
+            sensor_mode,
+            capture_width,
+            capture_height,
+            framerate,
+            flip_method,
+            display_width,
+            display_height,
+        )
+    )
+
+cap = cv2.VideoCapture(
+                gstreamer_pipeline(
+                    display_width=640,
+                    display_height=410,
+                    framerate=10,
+                ), 
+                cv2.CAP_GSTREAMER,
+            )
 cap = stop_if_none(cap, message='Camera open failed!')
 
 # if net.empty():

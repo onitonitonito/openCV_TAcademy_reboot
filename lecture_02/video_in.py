@@ -10,8 +10,9 @@ from _path import (DIR_SRC, get_cut_dir, stop_if_none)
 dir_avi = DIR_SRC + 'avi/'
 # video_name = '201907-01.mp4'    # stir-separate
 # video_name = '201907-02.mp4'
-video_name = '201907-03.mp4'
+# video_name = '201907-03.mp4'
 # video_name = '202006-01.mp4'
+video_name = 'go-crazy.mp4'
 
 
 # 동영상 파일로부터 cv2.VideoCapture 객체 생성
@@ -42,8 +43,10 @@ winName0 = 'Original Image'
 winName1 = 'Canny Edge Detection'
 
 sizeRate = 0.43
+# sizeRate = 0.3
+
 winResize = (int(width * sizeRate) , int(height * sizeRate))
-moveTo = (0, winResize[1]+70)
+moveTo = (0, winResize[1]+60)
 
 while True:
     _, frame = cap.read()
@@ -54,13 +57,18 @@ while True:
     edge = cv2.resize(edge, winResize)   
 
     cv2.imshow(winName0, frame)
-    cv2.moveWindow(winName0, 0,0)
+    cv2.moveWindow(winName0, *moveTo)
 
     cv2.imshow(winName1, edge)
-    cv2.moveWindow(winName1, *moveTo)
-
-    if cv2.waitKey(delay) == 27:
+    cv2.moveWindow(winName1, 0, 0)
+    
+    key = cv2.waitKey(delay)
+    if key == 27:   # ESC-key
         break
+    
+    #wait until any key is pressed
+    if key == ord('p'):
+        cv2.waitKey(-1)    
 
 # 자원 해제
 cap.release()

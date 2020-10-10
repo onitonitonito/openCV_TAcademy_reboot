@@ -67,13 +67,13 @@ def gstreamer_pipeline(
     
     
 def getRGB(img):
-    return cv2.cvtcolor(img, cv2.COLOR_BGR2RGB)
+    return cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
 def getBGR(img):
-    return cv2.cvtcolor(img, cv2.COLOR_RGB2BGR)
+    return cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
 
 def getGray(img):
-    return cv2.cvtcolor(img, cv2.COLOR_BGR2GRAY)
+    return cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
 DIR_HOME = get_cut_dir(NAME_HOME)
 DIR_SRC = DIR_HOME + 'src/'

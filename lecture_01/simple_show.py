@@ -6,9 +6,25 @@
 
 print(__doc__)
 
+import os
 import cv2
 import matplotlib.pyplot as plt
-from _path import (DIR_SRC, get_cut_dir, stop_if_none)
+
+from _path import (
+                    DIR_SRC,
+                    getRGB,
+                    getGray,
+
+                    get_cut_dir,
+                    stop_if_none,
+                )
+
+valid_exts = "png bmp jpg".split()
+imgs = [file for file in os.listdir(DIR_SRC)
+        if len(file.split('.')) > 1 and \
+            file.split('.')[-1] in valid_exts]
+
+[print(img) for img in imgs]
 
 # VARIOUS IMAGE READUNG : cv2 <-> plt
 # 01 CV2-object
@@ -25,6 +41,7 @@ srcRGB = stop_if_none(srcRGB, message='Image loading failed!')
 
 
 # CHECK: img type = ndarray
+print('\n\n', '# CHECK: img type = ndarray')
 [print(f"TYPE = {type(obj)}") for obj in [src, src2, srcRGB]]
 
 # cv2 imshow()
@@ -35,6 +52,6 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 # matplotlib = check image on window
-fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(10,7), )
-ax.imshow(src)
+fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(8,5), )
+ax.imshow(getRGB(getGray(src)))
 plt.show()

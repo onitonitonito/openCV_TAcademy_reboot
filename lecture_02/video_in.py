@@ -8,11 +8,11 @@ import cv2
 from _path import (DIR_SRC, get_cut_dir, stop_if_none)
 
 dir_avi = DIR_SRC + 'avi/'
-# video_name = '201907-01.mp4'    # stir-separate
+video_name = '201907-03.mp4'    # stir-separate
 # video_name = '201907-02.mp4'
 # video_name = '201907-03.mp4'
 # video_name = '202006-01.mp4'
-video_name = 'go-crazy.mp4'
+# video_name = 'go-crazy.mp4'
 
 
 # 동영상 파일로부터 cv2.VideoCapture 객체 생성
@@ -23,7 +23,7 @@ cap = cv2.VideoCapture(dir_avi + video_name)
 # cap = stop_if_none(cap, message="Camera open failed!")
 
 # 프레임 크기
-width = cap.get(cv2.CAP_PROP_FRAME_WIDTH) 
+width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
 height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
 
 count = cap.get(cv2.CAP_PROP_FRAME_COUNT)
@@ -42,33 +42,34 @@ delay = round(1000 / fps)
 winName0 = 'Original Image'
 winName1 = 'Canny Edge Detection'
 
-sizeRate = 0.43
-# sizeRate = 0.3
+# sizeRate = 0.43
+sizeRate = 0.36
+
 
 winResize = (int(width * sizeRate) , int(height * sizeRate))
-moveTo = (0, winResize[1]+60)
+moveTo = (0, winResize[1]+30)
 
 while True:
     _, frame = cap.read()
     frame = stop_if_none(frame, message="No Video Input!")
-    frame = cv2.resize(frame, winResize)   
+    frame = cv2.resize(frame, winResize)
 
     edge = cv2.Canny(frame, 50, 150)
-    edge = cv2.resize(edge, winResize)   
+    edge = cv2.resize(edge, winResize)
 
     cv2.imshow(winName0, frame)
     cv2.moveWindow(winName0, *moveTo)
 
     cv2.imshow(winName1, edge)
     cv2.moveWindow(winName1, 0, 0)
-    
+
     key = cv2.waitKey(delay)
     if key == 27:   # ESC-key
         break
-    
+
     #wait until any key is pressed
     if key == ord('p'):
-        cv2.waitKey(-1)    
+        cv2.waitKey(-1)
 
 # 자원 해제
 cap.release()

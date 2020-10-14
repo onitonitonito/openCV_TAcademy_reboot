@@ -6,7 +6,7 @@ import sys
 import cv2
 from _path import get_cut_dir
 
-dir_home = get_cut_dir('openCV_TAcademy')
+dir_home = get_cut_dir('openCV_TAcademy_reboot')
 
 
 # 카메라로부터 cv2.VideoCapture 객체 생성

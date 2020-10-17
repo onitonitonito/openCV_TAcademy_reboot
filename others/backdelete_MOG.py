@@ -1,5 +1,5 @@
 """
-# Python OpenCV 시작 (40) -
+# Python OpenCV 시작 (1) - MOG
 # 영상에서 배경제거하기 : https://bit.ly/2SUdiA7
 """
 import cv2
@@ -41,7 +41,6 @@ while True:
     # res = cv2.Canny(res, 50, 150)
 
     frame = cv2.resize(frame, winResize)
-
 
     cv2.imshow(winName0, fgmask)
     cv2.imshow(winName1, res)

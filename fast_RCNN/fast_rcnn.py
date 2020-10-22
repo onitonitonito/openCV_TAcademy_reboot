@@ -19,12 +19,6 @@ from PIL import ImageDraw
 from PIL import ImageFont
 # from PIL import ImageOps
 
-from _path import (DIR_SRC, get_cut_dir, stop_if_none)
-
-# 매 프레임 처리 및 화면 출력
-winName0 = 'Original Image'
-winName1 = 'Canny Edge Detection'
-
 # 이번에는 미리 학습된 모델인 inception_resnet_v2 불러온다.
 # 모듈안에는 구조나 가중치가 다 정해져 있기 때문에 학습은 할 필요가 없다
 # 구조를 보고 싶으면 detector.summary()를 통해 확인 가능하다

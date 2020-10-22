@@ -10,7 +10,7 @@ from _path import (DIR_SRC, get_cut_dir, stop_if_none)
 
 dir_avi = DIR_SRC + 'avi_test/'
 video_name = 'input.avi'
-sizeRate = 0.8
+sizeRate = 0.5
 
 # Video resource
 # cap = cv2.VideoCapture(0)
@@ -24,22 +24,25 @@ cap = stop_if_none(cap, message="Camera open failed!")
 def getMOG():
     """  """
     mog = cv2.createBackgroundSubtractorMOG2()
+    winName1 = 'Foreground-making (fgmask)'
+    winName2 = 'Bitwise and Frame (result)'
 
     frame2 = None
     while True:
         ret, frame = cap.read()
 
         frame2 = frame.copy()
+        
         fgmask = mog.apply(frame)
-        cv2.imshow('result',fgmask)
+
         res = cv2.bitwise_and(frame2,frame2,mask=fgmask)
-        cv2.imshow('res',res)
+
+        cv2.imshow(winName1,fgmask)
+        cv2.imshow(winName2,res)
+
         k = cv2.waitKey(1)
         if k == 27:
             break
-
-    cap.release()
-    cv2.destroyAllWindows()
 
 def getGMG():
     """  """
@@ -60,8 +63,8 @@ def getGMG():
         if k == 27:
             break
 
-    cap.release()
-    cv2.destroyAllWindows()
+cap.release()
+cv2.destroyAllWindows()
 
 
 # getGMG()

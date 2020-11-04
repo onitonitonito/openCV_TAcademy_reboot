@@ -5,17 +5,16 @@
 import cv2
 import numpy as np
 
-from _path import (DIR_SRC, get_cut_dir, stop_if_none)
+from _path import (DIR_SRC, stop_if_none)
 
 dir_avi = DIR_SRC + 'avi_test/'
-video_name = 'input.avi'
-sizeRate = 0.8
+video_name = '201907-01.mp4'
+# video_name = 'input.avi'
 
-# 매 프레임 처리 및 화면 출력
-winName0 = 'fgmask MOG'
-winName1 = 'bitwise result'
+sizeRate = 0.35
 
-# 동영상 파일로부터 cv2.VideoCapture 객체 생성
+# Video resource
+# cap = cv2.VideoCapture(0)
 cap = cv2.VideoCapture(dir_avi + video_name)
 cap = stop_if_none(cap, message="Camera open failed!")
 
@@ -23,35 +22,45 @@ width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
 height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
 winResize = (int(width * sizeRate) , int(height * sizeRate))
 
-mog = cv2.createBackgroundSubtractorMOG2()
 
-frame2 = None
+def main():
+    getMOG(canny=0)
 
-while True:
-    ret, frame = cap.read()
-    frame2 = frame.copy()
+def getMOG(canny=0):
+    """  """
+    winName0 = 'MOG2 / canny={}'.format(canny)
+    winName1 = 'Bitwise / canny={}'.format(canny)
 
-    fgmask = mog.apply(frame)
-    res = cv2.bitwise_and(frame2, frame2, mask=fgmask)
+    mog = cv2.createBackgroundSubtractorMOG2()
 
-    # mog 
-    fgmask = cv2.resize(fgmask, winResize)
-    fgmask = cv2.Canny(fgmask, 50, 150)
+    while True:
+        ret, frame = cap.read()
+        frame2 = frame.copy()
 
-    # bitwise
-    res = cv2.resize(res, winResize)
-    res = cv2.Canny(res, 50, 150)
+        fgmask = mog.apply(frame)
+        bitwise = cv2.bitwise_and(frame2, frame2, mask=fgmask)
 
-    frame = cv2.resize(frame, winResize)
+        # resize
+        frame = cv2.resize(frame, winResize)
+        fgmask = cv2.resize(fgmask, winResize)
+        bitwise = cv2.resize(bitwise, winResize)
 
-    cv2.imshow(winName0, fgmask)
-    cv2.imshow(winName1, res)
-    cv2.imshow('src', frame)
+        # if canny filter
+        if canny:
+            fgmask = cv2.Canny(fgmask, 50, 150)
+            bitwise = cv2.Canny(bitwise, 50, 150)
+
+        cv2.imshow(winName0, fgmask)
+        cv2.imshow(winName1, bitwise)
+        cv2.imshow('original', frame)
+
+        k = cv2.waitKey(1)
+        if k == 27:
+            break
+
+    cap.release()
+    cv2.destroyAllWindows()
 
 
-    k = cv2.waitKey(1)
-    if k == 27:
-        break
-
-cap.release()
-cv2.destroyAllWindows()
+if __name__ == '__main__':
+    main()

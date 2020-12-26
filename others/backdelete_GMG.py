@@ -8,7 +8,7 @@ import numpy as np
 from _path import (DIR_SRC, stop_if_none)
 
 dir_avi = DIR_SRC + 'avi_test/'
-video_name = '201907-02.mp4'
+video_name = '201907-01.mp4'
 # video_name = 'input.avi'
 
 sizeRate = 0.35

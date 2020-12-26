@@ -23,6 +23,7 @@ _.py
 *.h5
 *.xml
 *.mp4
+*.npz
 
 im_boxed_*.png
 CHART_*.png

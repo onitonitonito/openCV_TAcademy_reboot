@@ -1,0 +1,26 @@
+"""
+# simple saved video input test : '/src/vtest.avi'
+"""
+
+import sys
+import cv2
+
+from _path import (DIR_SRC, get_cut_dir, stop_if_none)
+
+src = cv2.imread(DIR_SRC + 'candies.png')
+
+if src is None:
+    print('Image load failed!')
+    sys.exit()
+
+src_hsv = cv2.cvtColor(src, cv2.COLOR_BGR2HSV)
+
+dst1 = cv2.inRange(src, (0, 128, 0), (100, 255, 100))
+dst2 = cv2.inRange(src_hsv, (50, 150, 0), (80, 255, 255))
+
+cv2.imshow('src', src)
+cv2.imshow('dst1', dst1)
+cv2.imshow('dst2', dst2)
+cv2.waitKey()
+
+cv2.destroyAllWindows()

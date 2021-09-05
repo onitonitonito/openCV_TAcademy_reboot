@@ -10,10 +10,17 @@ from _path import (DIR_SRC, get_cut_dir, stop_if_none)
 dir_avi = DIR_SRC + 'avi_test/'
 
 # video_name = 'input.avi'    # avi, mp4, video_clip
-video_name = '201907-03.mp4'    # avi, mp4, video_clip
+list_video = (
+    '201907-03.mp4',
+    "2021-08-12-transfer-test-SVGA.mp4",
+    "2021-08-27-discharge-all-SVGA.mp4",
+    "2021-08-27-rubber-sheet-SVGA.mp4",
+)
+
+video_name = list_video[0]    # avi, mp4, video_clip
 
 landscape = 0              # 0 = Portrait / 1 = Landscape
-sizeRate = 0.4
+sizeRate = 0.7
 
 # 동영상 파일로부터 cv2.VideoCapture 객체 생성
 
